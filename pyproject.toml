@@ -1,6 +1,6 @@
 # This is a TOML document.
 
-title = "TOML's file for the My Project"
+title = "TOML's file to distribute the Shellenv project"
 
 [build-system]
 requires = [

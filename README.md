@@ -1,12 +1,8 @@
-#  python-myproj is an example to distribute the python's project 
+# (python-)shellenv is an example to distribute the python's project 
 
-  **python-myproj** is an example to distribute the python's project 
-   consisting of two files written on Python.
+  **(python-)shellenv** is python's module it displays enviroment info and 
+  it's consisting of two files written on Python. Both files may use as either 
+  an executed script or included module.
 
-  All of example files written on Python and relesed as scripts or 
-  included module. 
-
-  So, you may distribute free this project. Licensed under GNU GPL version 2.
-
-https://stackoverflow.com/questions/1523427/what-is-the-common-header-format-of-python-files 
+  This project is licensed under the Python Software Foundation License Version 2.
 

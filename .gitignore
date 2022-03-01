@@ -1,6 +1,6 @@
 .gitignore~
-.*~
 *~
 dist/*
 src/.*~
-src/myproj/__pycache__/*
+src/shellenv/__pycache__/*
+src/shellenv_package_rjaan.egg-info/*
