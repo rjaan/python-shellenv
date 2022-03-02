@@ -3,4 +3,5 @@
 dist/*
 src/.*~
 src/shellenv/__pycache__/*
-src/shellenv_package_rjaan.egg-info/*
+src/shellenv_module_rjaan.egg-info/*
+src/shellenv_rjaan.egg-info/*
