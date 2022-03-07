@@ -30,14 +30,32 @@ if __name__ == '__main__':
       print ( 'FAILURE' ) 
       sys.exit(False)
    print ( str(key)+':'+str(pos)+' may be a maximum compliance with: SHERRYHW_NAME' )   
-    
-   # add new varaible NEWTEST_MYVAR='New test value':
+   (key,pos)=shellenv.nminhitsenv('SHERRYHW_NAME')
+   if key == '' :    
+      print ( 'FAILURE' ) 
+      sys.exit(False)
+   print ( str(key)+':'+str(pos)+' may be a minimum compliance with: SHERRYHW_NAME' )   
+
+   # add new varaible SHERRYHW_NAME with value 'Sherry platform' :
    print ( '*** test setenv()/getenv() ***' )
    shellenv.setenv('SHERRYHW_NAME',sherryhw) 
    sherryhw = shellenv.getenv('SHERRYHW_NAME')
    if ( sherryhw != 'Sherry platform' ) :
      print ( 'FAILURE' ) 
      sys.exit(False)
-   print ( 'PASSED' ) 
+
+   print ( 'Ok, set up / changed value \'%s\'' % (sherryhw,) )
+
+   # try to delete varaible's named MYVAR 
+   print ( '*** test to unsetenv() when envar does not exists ***' )
+   if shellenv.unsetenv('MYVAR') != None :
+      print ( 'FAILURE' )   
+   print ('Sure, MYVAR\'s does not exists - it\'s a true')  
+   print ( '*** test to unsetenv() test to unsetenv() to removes SHERRYHW_NAME ***' )
+   v=shellenv.unsetenv('SHERRYHW_NAME')
+   if v == None :
+      print ( 'FAILURE' )       
+   print ( 'It was not unexpected that SHERRYHW_NAME had the value \'%s\'' % (v,) )  
+   print ( 'DONE.' ) 
    sys.exit(True)
 
