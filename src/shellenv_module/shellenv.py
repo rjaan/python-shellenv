@@ -43,17 +43,16 @@ def nmaxhitsenv(ckey):
      pkeys=KHints()
      for k in os.environ.keys() :
          nhits=0
-         print(k)
          for n in range(1,len(ckey)) :
              if k[0:n] == ckey[0:n] :
                 nhits+=1
              pass
          if nhits :
            rpos=list(os.environ.keys()).index(k)
-           pkeys.dkeys.update(k,nhits,rpos)
-     if  len(pkeys.d) :
+           pkeys.dkeys.update({k:[nhits,rpos]})
+     if  len(pkeys.dkeys) :
         maxhave_k=pkeys.domax()
-        return (maxhave_k,pkeys.getpos(maxhave_k))
+        return (maxhave_k,pkeys.dkeys.get(maxhave_k))
      return ('',0)   
 #
 # The function changenv(vkey,newvalue) updates os.environ to modify since  
@@ -81,9 +80,10 @@ def getenv(vkey):
 # the function print_all is an analog of shell-command ENV(1)
 # 
 def print_all():
-    print ( '*** Print all environment variables ***' )
 # Actually, print all environment variables on the standard output if those 
-# variables is accessible to Python .       
-    for key in os.environ:
-       print('{}={}'.format(key, getenv(key)))  
-
+# variables is accessible to Python.
+  n=0       
+  for key in os.environ:
+      print('{}={}'.format(key, getenv(key)))  
+      n+=1
+  return n  

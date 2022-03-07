@@ -16,21 +16,28 @@ if __name__ == '__main__':
    sherryhw = 'Sherry platform'
    print ( 'Script\'s name: %s' % os.path.basename(__file__) )
    print ( 'Call print_all() from module shellenv:' )
-   # print all variables in SHELL:  
-   #shellenv.print_all()
+   # print all variables in SHELL:
+   print ( '*** Print all environment variables ***' )  
+   if shellenv.print_all() == 0 :
+      print ( 'FAILURE' ) 
+      sys.exit(False)
   
    # scannig the environment variables how accurate to coincided a compared variable 
    # name per characters.
+   print ( '*** Scans for hits ***' )
    (key,pos)=shellenv.nmaxhitsenv('SHERRYHW_NAME')
-   
+   if key == '' :    
+      print ( 'FAILURE' ) 
+      sys.exit(False)
    print ( str(key)+':'+str(pos)+' may be a maximum compliance with: SHERRYHW_NAME' )   
- 
+    
    # add new varaible NEWTEST_MYVAR='New test value':
+   print ( '*** test setenv()/getenv() ***' )
    shellenv.setenv('SHERRYHW_NAME',sherryhw) 
    sherryhw = shellenv.getenv('SHERRYHW_NAME')
-   if ( sherryhw == 'Sherry platform' ) :
-     print ( 'test setenv()/getenv() : PASSED' ) 
-     sys.exit(True)
-   sys.exit(False)            
-   
+   if ( sherryhw != 'Sherry platform' ) :
+     print ( 'FAILURE' ) 
+     sys.exit(False)
+   print ( 'PASSED' ) 
+   sys.exit(True)
 
