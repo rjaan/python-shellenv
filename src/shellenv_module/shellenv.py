@@ -1,20 +1,60 @@
 #!/usr/bin/env python3
 
-"""shellenv.py: imported module what displays enviroment info"""
+"""shellenv.py: Using the module shellenv, you able to operate with environment variables"""
 
 __author__      = "Andrew Rzhaskov"
 __copyright__   = "Copyright 2022, Russia Moscow"
 
-import os
-import bisect 
+import os          
 
+# setenv():
+# either change an exists key or append new key to dictionary  
+def setenv(newkey,newvalue) : 
+    if not os.environ.get(newkey):
+       os.environ.setdefault(newkey,newvalue)
+       return True;
+    return changenv(vkey,newvalue);
+
+# I needed to create the class where a problem will be resolved when  
+# the nested dictionary list scans to get maximum number of hits in this
+# 
+# Why you can't inherit Python built-in dict type, 
+# see to http://www.kr41.net/2016/03-23-dont_inherit_python_builtin_dict_type.html
+class KHints():      
+     def __init__(self):
+         self.dkeys={}
+         
+     def __gethits(self,k) : 
+         (h,p)=self.dkeys.get(k)
+         return h
+
+     def domax(self) :
+         return max(self.dkeys,key=self.__gethits) 
+
+# nmaxhitsenv(key) 
 #
-# The function insrtenva(newkey,newvalue) allows to insert new variable in 
-# sorted order
-def insrtenva(newkey,newvalue):
-    for key, value in os.environ.items():
-           
-
+# scans an environment variables how accurate to coincided 
+# a compared variable name per characters.
+# This function returns two values. The first to be returned a value of max number 
+# was fell out at time of symbol matching. And the second is coming next 
+# a position into os.environ where it occured.  
+#
+def nmaxhitsenv(ckey):
+     pkeys=KHints()
+     for k in os.environ.keys() :
+         nhits=0
+         print(k)
+         for n in range(1,len(ckey)) :
+             if k[0:n] == ckey[0:n] :
+                nhits+=1
+             pass
+         if nhits :
+           rpos=list(os.environ.keys()).index(k)
+           pkeys.dkeys.update(k,nhits,rpos)
+     if  len(pkeys.d) :
+        maxhave_k=pkeys.domax()
+        return (maxhave_k,pkeys.getpos(maxhave_k))
+     return ('',0)   
 #
 # The function changenv(vkey,newvalue) updates os.environ to modify since  
 # calling os.putenv() directly since calling the function does nothing 
