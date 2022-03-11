@@ -1,11 +1,11 @@
-# (python-)shellenv is an example to distribute the python's project 
+# (python-)shellenv is python's module to operate with environment variables   
 
-  **shellenv(_module)** is python's module it displays enviroment info and 
+  **shellenv(_module)** is python's module to display enviroment info and 
   it's consisting of two files written on Python. Both files may use as either 
   an executed script or included module.
 
   Using the module shellenv, you able to operate with environment variables with 
-  use with use equivalents to the functions family getent(3) in C
+  use equivalents to the functions family getent(3) in C
 
   **unsetenv(vkey)**: removes variable key from os.environ
 
@@ -15,6 +15,20 @@
   **setenv(newkey,newvalue)**: either change an exists key or append new key to dictionary.
 
   **print_all()**: prints all value from os.environ and counts total numbers vkeys
-      
+  
+  First, you get a source code of this module and go to the directory python-shellenv, as below.
+```   
+   git clone https://github.com/rjaan/python-shellenv.git &&\
+   cd python-shellenv
+```
+  And then build python-shellenv, you have to run following command in the repo directory:
+``` 
+   python -m bild
+```
+  Finally, you need to install this module from your local PIP or run the next command:
+```
+   pip install shellenv_module-rjaan-1.0.tar.gz 
+```
+
   This project is licensed under the Python Software Foundation License Version 2.
 
