@@ -4,7 +4,7 @@
   it's consisting of two files written on Python. Both files may use as either 
   an executed script or included module.
 
-  Using the module shellenv, you able to operate with environment variables with 
+  Using the module shellenv, you able to operate environment variables with
   use equivalents to the functions family getent(3) in C
 
   **unsetenv(vkey)**: removes variable key from os.environ
