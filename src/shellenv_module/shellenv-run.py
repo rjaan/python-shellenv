@@ -8,11 +8,13 @@ __copyright__   = "Copyright 2022, Russia Moscow"
 import os
 import sys
 import shellenv
+
 """
    We will run the module as program if it is a runnable script. Otherwise, 
    it's a simple module that one is a file containing Python definitions and 
    statements.    
 """
+
 if __name__ == '__main__':
    sherryhw = 'Sherry platform'
    print ( 'Script\'s name: %s' % os.path.basename(__file__) )
@@ -86,9 +88,6 @@ if __name__ == '__main__':
           print ( 'FAILURE.' )
           sys.exit(False)     
           pass
- 
+
    print ( 'DONE.' ) 
    sys.exit(True)
-
-
-
