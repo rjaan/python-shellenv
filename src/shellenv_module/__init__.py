@@ -4,7 +4,8 @@ all = [ 'unsetenv',
         'getenv', 
         'nmaxhitsenv', 
         'nminhitsenv', 
-        'changenv' ]
+        'changenv',
+        'print_all' ]
 
 # eof
 
