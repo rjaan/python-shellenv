@@ -2,7 +2,6 @@
 *~
 dist/*
 src/.*~
-src/shellenv_module/.*~
-src/shellenv_module/__pycache__/*
-src/shellenv_module.egg-info/*
-src/shellenv_module.egg-info/*
+src/shellenv/.*~
+src/shellenv/__pycache__/*
+src/shellenv.egg-info/*

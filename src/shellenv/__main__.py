@@ -8,8 +8,6 @@ __copyright__   = "Copyright 2022, Russia Moscow"
 import os
 import sys
 
-from .shellenv import ( unsetenv, setenv, getenv, nmaxhitsenv, nminhitsenv, changenv, print_all )
-
 __sherryhw = 'Sherry platform'
 """
    We will run the module as program if it is a runnable script. Otherwise, 
