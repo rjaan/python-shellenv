@@ -27,8 +27,12 @@
 ```
   Finally, you need to install this module from your local PIP or run the next command:
 ```
-   pip install shellenv_module-rjaan-1.0.tar.gz 
+   pip install shellenv_module-rjaan-1.4.tar.gz 
+```
+Example for using
+```
+$ python3 -m shellenv
 ```
 
-  This project is licensed under the Python Software Foundation License Version 2.
+This project is licensed under the Python Software Foundation License Version 2.
 
