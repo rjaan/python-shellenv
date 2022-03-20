@@ -23,7 +23,7 @@
 ```
   And then build python-shellenv, you have to run following command in the repo directory:
 ``` 
-   python -m bild
+   python -m build
 ```
   Finally, you need to install this module from your local PIP or run the next command:
 ```
