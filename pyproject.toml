@@ -5,6 +5,7 @@ title = "TOML's file to distribute the Shellenv project"
 [build-system]
 requires = [
     "setuptools>=42",
+    "python-dotenv>=0.19",
     "wheel"
 ]
 build-backend = "setuptools.build_meta"
