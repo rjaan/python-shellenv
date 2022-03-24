@@ -5,3 +5,6 @@ src/.*~
 src/shellenv/.*~
 src/shellenv/__pycache__/*
 src/shellenv.egg-info/*
+bin/*
+develop-eggs/*
+
