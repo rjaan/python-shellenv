@@ -2,9 +2,6 @@
 
 """shellenv.py: Using the module shellenv, you able to operate with environment variables"""
 
-__author__      = "Andrew Rzhaskov"
-__copyright__   = "Copyright 2022, Russia Moscow"
-
 import os          
 from typing import ( Dict, Tuple )
 
