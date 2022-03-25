@@ -46,6 +46,8 @@ setup(
         author = 'Andrey Rzhavskov',
         packages = find_packages('shellenv'),
         package_dir = {'': 'src'},
+#        packages = find_packages('shellenv'),
+#        package_dir = {'': 'src'},
         install_requires = [ 'setuptools>=42', 'python-dotenv>=0.19' ],
         python_requires  = '>=3.8',
         long_description=read('README.md'),
