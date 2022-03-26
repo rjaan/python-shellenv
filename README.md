@@ -18,21 +18,24 @@
   
   First, you get a source code of this module and go to the directory python-shellenv, as below.
 ```   
-   git clone https://github.com/rjaan/python-shellenv.git &&\
-   cd python-shellenv
+    $ git clone https://github.com/rjaan/python-shellenv.git && \
+      cd python-shellenv
 ```
   And then build python-shellenv, you have to run following command in the repo directory:
 ``` 
-   python -m build
+    $ python -m build
 ```
   Finally, you need to install this module from your local PIP or run the next command:
 ```
-   pip install shellenv_module-rjaan-1.4.tar.gz 
+    $ pip install shellenv_module-rjaan-1.5.tar.gz 
 ```
-Example for using
+  The module python-shellenv runs command next as
+``` 
+    $ python3 -m 
 ```
-$ python3 -m shellenv
+  Or executes wrapper script in command line by
+```      
+    $ py-shellenv
 ```
-
 This project is licensed under the Python Software Foundation License Version 2.
 
