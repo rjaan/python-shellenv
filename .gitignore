@@ -9,3 +9,4 @@ src/shellenv.egg-info/*
 bin/*
 develop-eggs/*
 parts/*
+build/*
