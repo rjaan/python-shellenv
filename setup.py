@@ -59,7 +59,9 @@ setup(
             # http://pypi.python.org/pypi?%3Aaction=list_classifiers
             ],
         zip_safe=True,
+        entry_points={
+            "console_scripts": ["py-shellenv=shellenv.__main__:main"],
+        },
         options={"bdist_wheel": {"universal": True}},
         platforms=["any"],
 )
-
