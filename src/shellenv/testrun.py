@@ -8,7 +8,7 @@ __sherryhw = 'Sherry platform'
 def __run_printall()->bool:
     """ print all variables in SHELL:"""
     print ( '\t*** Print all environment variables ***' )  
-    if shellenv.print_all() == 0 :
+    if shellenv.print_all(silently=True) == 0 :
        return False
     return True
 

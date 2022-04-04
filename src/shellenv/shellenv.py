@@ -118,7 +118,7 @@ def print_all(ckey: str ='ENVALL', silently: bool = False) -> int:
     """
     n=int(0)       
     for key in os.environ:
-      if silently == True :  
+      if silently == False :  
          print('{}={}'.format(key, getenv(key)))  
       n+=1
       if ckey != 'ENVALL' and key == ckey :   

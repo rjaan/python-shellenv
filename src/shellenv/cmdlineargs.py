@@ -5,7 +5,7 @@ import os
 import sys
 import argparse
 import typing as t
-from shellenv import __version__        
+from shellenv import __version__, print_all        
 """
     Defining the derivative classes from argparse.Action    
 """
@@ -61,15 +61,26 @@ class _TestRunAction(_CommonAction):
 
 class _OutputAllRunAction(_CommonAction):
       """
-          Defining Action for option --output-all
+         Defining Action for option --output-all
       """
       def __init__(self, option_strings, dest, nargs=None, **kwargs ):
           super(_OutputAllRunAction, self).__init__( catcher=self.catcher, option_strings=option_strings, dest=dest, nargs=nargs ,**kwargs )
-          
+      
       @classmethod
-      def catcher( cls, **kwargs ): 
-          print ( 'Call OutputAllRunAction: returns zero-value' )
-          return 0 
+      def catcher(cls, **kwargs ): 
+          n=print_all() 
+          print ( 'Read %d shell\'s variables' % n )
+          if n != 0 :
+             return 0 
+          return 1
+ 
+#      @classmethod
+#      def catcher( cls, **kwargs ): 
+#          """
+#             Call OutputAllRunAction:catcher to print all enviroment variables 
+#          """
+#          print_all() 
+#          return 0 
 
 def mloop_exec(self,argv: t.Sequence[str] = None)->None:
     """
