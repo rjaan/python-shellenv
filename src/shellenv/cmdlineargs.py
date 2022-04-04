@@ -5,7 +5,9 @@ import os
 import sys
 import argparse
 import typing as t
-from shellenv import __version__, print_all        
+
+from .testrun import functionality_check
+from shellenv import __version__, print_all    
 """
     Defining the derivative classes from argparse.Action    
 """
@@ -56,8 +58,11 @@ class _TestRunAction(_CommonAction):
           
       @classmethod
       def catcher(cls, **kwargs ): 
-          print ( 'Call TestRunAction: returns zero-value' )
-          return 0 
+          rval=functionality_check()
+          #print ( 'Call TestRunAction: returns zero-value' )
+          if rval != 0 :
+             return 0 
+          return 1 
 
 class _OutputAllRunAction(_CommonAction):
       """

@@ -78,7 +78,7 @@ def __run_dotenv()->bool:
            return False
            pass
 
-def functionality_check(argv=None)->None:
+def functionality_check()->bool:
    """
       This function is a major and it will run other functions into the location
    """
