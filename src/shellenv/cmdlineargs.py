@@ -7,7 +7,7 @@ import argparse
 import typing as t
 
 from .testrun import functionality_check
-from shellenv import __version__, print_all    
+from shellenv import __version__, print_all, nmaxhitsenv, getenv    
 """
     Defining the derivative classes from argparse.Action    
 """
@@ -16,20 +16,22 @@ class _CommonAction(argparse.Action):
           Defining the Common Action to set an option handler 
       """
       def __init__(self, catcher, **kwargs ) :
-          option_strings=self.__kwargs_get(kwargs,'option_strings')
-          dest=self.__kwargs_get(kwargs,'dest') 
-          nargs=self.__kwargs_get(kwargs,'nargs') 
-          if self.__kwargs_get(kwargs,'help') is None :
+          option_strings=self._kwargs_get(kwargs,'option_strings')
+          dest=self._kwargs_get(kwargs,'dest') 
+          nargs=self._kwargs_get(kwargs,'nargs')
+          if nargs is None :
+             nargs = 0
+          if self._kwargs_get(kwargs,'help') is None :
              raise argparse.ArgumentTypeError("help value must always be assigned!")
-          if self.__kwargs_get(kwargs, 'required') is None :
+          if self._kwargs_get(kwargs, 'required') is None :
              raise argparse.ArgumentTypeError("required value must always be define explisity, True or False!")
           super(_CommonAction, self).__init__(
-                       option_strings=option_strings, dest=dest, nargs=0, help=kwargs['help']
-                       ) 
+                        option_strings=option_strings, dest=dest, nargs=nargs, help=kwargs['help']
+                      ) 
           self.catcher=catcher
  
       @staticmethod
-      def __kwargs_get(kws,key): 
+      def _kwargs_get(kws,key): 
           for k in kws.keys():
                if k == key :
                   return kws[k]
@@ -40,7 +42,7 @@ class _CommonAction(argparse.Action):
           raise argparse.ArgumentTypeError( 'direct call CommonAction.catcher() is illegal!' ) 
 
       def __call__(self, parser, namespace, values, option_string=None):
-          print('Run option: namespace=%r, values=%r, option_string=%r' % (namespace, values, option_string))
+          #print('Run option: namespace=%r, values=%r, option_string=%r' % (namespace, values, option_string))
           setattr(namespace, self.dest, values)
           if not self.catcher is None :
              sys.exit(self.catcher (
@@ -78,15 +80,24 @@ class _OutputAllRunAction(_CommonAction):
           if n != 0 :
              return 0 
           return 1
+       
+class _GetenvAllRunAction(_CommonAction):
+      """
+         Defining Action for option --getenv vkey 
+      """
+      def __init__(self, option_strings, dest, nargs=None, **kwargs ):
+          super(_GetenvAllRunAction, self).__init__( catcher=self.catcher, option_strings=option_strings, dest=dest, nargs=nargs ,**kwargs )
+      
+      @classmethod
+      def catcher(cls, **kwargs ): 
+          vkey = cls._kwargs_get(kwargs,'values')[0]
+          (key,pos)=nmaxhitsenv(vkey)
+          if len(key) - len(vkey) == 0  :
+             print('{}={}'.format( vkey, getenv(vkey) ) )
+             sys.exit(0)
+          else :         
+             sys.exit(1)
  
-#      @classmethod
-#      def catcher( cls, **kwargs ): 
-#          """
-#             Call OutputAllRunAction:catcher to print all enviroment variables 
-#          """
-#          print_all() 
-#          return 0 
-
 def mloop_exec(self,argv: t.Sequence[str] = None)->None:
     """
     This function may be run by according to next help page:
@@ -94,13 +105,12 @@ def mloop_exec(self,argv: t.Sequence[str] = None)->None:
     ./shellenv [options] or python -m shellenv [options]     
 
     Options:
-
-              --help                  returns help page and exit immediate)
-              --version               prints a version and an info about creater module 
-              --getenv [keyword|vkey] finds and prints all shell variables with keyword 
-                                      or only one variable when it has matched vkey      
-              -t,--test-all           tests all methods for functionality checking
-              -O,--output-all         output all of shell enviroment variables    
+              --help           returns help page and exit immediate)
+              --version        prints a version and an info about creater module 
+              -t,--test-all    tests all methods for functionality checking
+              -O,--output-all  output all of shell enviroment variables
+              --getenv vkey    finds and prints all shell variables with keyword 
+                               or only one variable when it has matched vkey      
     """
     if argv is None:
        # argv[0] is the script name so we may be skip it and start from 
@@ -123,10 +133,18 @@ def mloop_exec(self,argv: t.Sequence[str] = None)->None:
     )
     parser.add_argument(
                      "-O","--output-all",
-                      required=False,
+                     required=False,
                      help=str("output all of shell enviroment variables"),
                      action=_OutputAllRunAction
     )
+    parser.add_argument("--getenv",
+                        nargs=1,
+                        required=False,
+                        help=str("""finds and prints all shell variables on its keyword
+                                    or only one variable when it has matched vkey"""),
+                        action=_GetenvAllRunAction 
+    )
+                                      
     #   
     # Ah, required options don't have used here. So, while I can not find 
     # reasons to be used them.
