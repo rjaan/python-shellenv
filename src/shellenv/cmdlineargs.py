@@ -102,7 +102,7 @@ def mloop_exec(self,argv: t.Sequence[str] = None)->None:
     """
     This function may be run by according to next help page:
     
-    ./shellenv [options] or python -m shellenv [options]     
+    ./shellenv [options]     
 
     Options:
               --help           returns help page and exit immediate)

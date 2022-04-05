@@ -37,5 +37,19 @@
 ```      
     $ py-shellenv
 ```
+  You have to run py-shellenv with option --help to get detailed information of use it
+```    
+   $ ../../bin/py-shellenv --help
+   usage: shellenv [options]
+
+   optional arguments:
+          -h, --help        show this help message and exit
+          -V, --version     returns help page and exit immediate
+          -t, --test        tests all methods for functionality checking
+          -O, --output-all  output all of shell enviroment variables
+          --getenv GETENV   finds and prints all shell variables on its keyword or 
+                            only one variable when it has matched vkey
+```
+
 This project is licensed under the Python Software Foundation License Version 2.
 
