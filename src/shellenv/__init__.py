@@ -5,7 +5,7 @@ __version__      = "1.6"
 
 from typing import Any, Optional
 
-from .shellenv import ( unsetenv, setenv, getenv, nmaxhitsenv, nminhitsenv, changenv, print_all )
+from .shellenv import ( unsetenv, setenv, getenv, nmaxhitsenv, nminhitsenv, changenv, print_all, similarvars_nhitsenv )
 
 all = [ 'unsetenv',
         'setenv',
@@ -14,7 +14,8 @@ all = [ 'unsetenv',
         'nminhitsenv',
         'changenv',
         'print_all', 
-        'functionality_check' ]
+        'functionality_check',
+        'similarvars_nhitsenv' ]
 
 # eof
 

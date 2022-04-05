@@ -3,7 +3,7 @@
 """shellenv.py: Using the module shellenv, you able to operate with environment variables"""
 
 import os          
-from typing import ( Dict, Tuple )
+from typing import ( List, Dict, Tuple,TypedDict )
 
 def unsetenv(key: str) -> str :   
     """ removes the variable name from os.environ """
@@ -16,6 +16,16 @@ def setenv(newkey: str, newvalue: str) -> bool :
        return True;
     return changenv(vkey,newvalue);
 
+class DictKHints(TypedDict):
+      """ 
+          This class is a dictionary objects with a specific set of string keys
+
+          key   -- variable key has the string type that
+          value -- allow to avoid problem to extract their values
+      """ 
+      key:str    # variable key has the string type that   
+      value:str  # allow to avoid problem to extract their values  
+      
 class KHints():      
      """ 
      I needed to create the class where a problem will be resolved when  
@@ -25,7 +35,7 @@ class KHints():
      see to http://www.kr41.net/2016/03-23-dont_inherit_python_builtin_dict_type.html
      """    
      def __init__(self)->None:
-         self.dkeys={}
+         self.dkeys=DictKHints()
          
      def __gethits(self,k:str)->int : 
          (h,p)=self.dkeys.get(k)
@@ -36,6 +46,18 @@ class KHints():
 
      def domin(self)->str :
          return min(self.dkeys,key=self.__gethits) 
+
+     def dosimilarvars(self,ckey:str)->Tuple[int,TypedDict]:
+         nvars=0
+         for k in os.environ.keys() :
+            if k[0:len(ckey)] == ckey :
+               if len(k) == len(ckey) :
+                  return (0,None) 	
+               self.dkeys.update({k:getenv(k)})                	           
+               nvars+=1
+         if nvars :
+            return (nvars,self.dkeys)                      
+         return (0,None)
 
 def __nhitsenv(ckey: str) -> KHints:
      """
@@ -54,13 +76,22 @@ def __nhitsenv(ckey: str) -> KHints:
            pkeys.dkeys.update({k:[nhits,rpos]})
      return pkeys;
 
+def similarvars_nhitsenv (criteria: str)->Tuple[int,TypedDict]:
+    """
+    search multiple variables and their values on first characters in 
+    the variable name that have to name as desired variables and store 
+    in list `dvars`.    
+    """ 
+    return KHints().dosimilarvars(criteria)
+    
 def nmaxhitsenv(ckey : str) -> Tuple[str,int]:
     """
     This function returns two values. The first to be returned a value of max number 
     was fell out at time of symbol matching. And the second is coming next 
     a position into os.environ where it occured.   
     """
-    pkeys=__nhitsenv(ckey) 
+    pkeys=__nhitsenv(ckey)
+ 
     if len(pkeys.dkeys) :
        __maxhave_k=pkeys.domax()
        (h,p)=pkeys.dkeys.get(__maxhave_k) 

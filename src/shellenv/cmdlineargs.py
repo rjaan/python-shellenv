@@ -7,7 +7,7 @@ import argparse
 import typing as t
 
 from .testrun import functionality_check
-from shellenv import __version__, print_all, nmaxhitsenv, getenv    
+from shellenv import __version__, print_all, nmaxhitsenv, getenv, similarvars_nhitsenv    
 """
     Defining the derivative classes from argparse.Action    
 """
@@ -83,7 +83,7 @@ class _OutputAllRunAction(_CommonAction):
        
 class _GetenvAllRunAction(_CommonAction):
       """
-         Defining Action for option --getenv vkey 
+         Defining Action for option --getenv vkey|criteria 
       """
       def __init__(self, option_strings, dest, nargs=None, **kwargs ):
           super(_GetenvAllRunAction, self).__init__( catcher=self.catcher, option_strings=option_strings, dest=dest, nargs=nargs ,**kwargs )
@@ -91,8 +91,15 @@ class _GetenvAllRunAction(_CommonAction):
       @classmethod
       def catcher(cls, **kwargs ): 
           vkey = cls._kwargs_get(kwargs,'values')[0]
+          (nvars,similarvars)=similarvars_nhitsenv(vkey)
+          if similarvars : 
+             print ('There was found '+str(nvars)+' similar variables that start with an '+vkey )
+             for key in similarvars.keys() :
+                 print('{}={}'.format( key, similarvars.get(key) ) )             
+             sys.exit(0)
+
           (key,pos)=nmaxhitsenv(vkey)
-          if len(key) - len(vkey) == 0  :
+          if len(key) - len(vkey) == 0 :
              print('{}={}'.format( vkey, getenv(vkey) ) )
              sys.exit(0)
           else :         
@@ -116,7 +123,7 @@ def mloop_exec(self,argv: t.Sequence[str] = None)->None:
        # argv[0] is the script name so we may be skip it and start from 
        # first item  
        argv = sys.argv[1:]
- 
+    
     parser = argparse.ArgumentParser(prog='shellenv', usage='%(prog)s [options]')
     # Unessential option                   
     parser.add_argument(
