@@ -15,6 +15,9 @@
   **setenv(newkey,newvalue)**: either change an exists key or append new key to dictionary.
 
   **print_all()**: prints all value from os.environ and counts total numbers vkeys
+
+  **similarvars_nhitsenv()**: search multiple variables and their values by 
+    first characters in the variable name that have to start from the same name as desired variables
   
   First, you get a source code of this module and go to the directory python-shellenv, as below.
 ```   
@@ -50,6 +53,14 @@
           --getenv GETENV   finds and prints all shell variables on its keyword or 
                             only one variable when it has matched vkey
 ```
-
+ For version 1.6 of the module py-shellenv, it released a feature to search 
+ the multiple environment variables and their actual values by first characters in 
+ the variable name. This  feature runs via option --getenv, e.g 
+```
+   $ py-shellenv --getenv SSH
+   There was found 2 similar variables that start with an SSH
+   SSH_AGENT_LAUNCHER=openssh
+   SSH_AUTH_SOCK=/run/myuser/1103/keyring/ssh
+```
 This project is licensed under the Python Software Foundation License Version 2.
 

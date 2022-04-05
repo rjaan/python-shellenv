@@ -79,8 +79,7 @@ def __nhitsenv(ckey: str) -> KHints:
 def similarvars_nhitsenv (criteria: str)->Tuple[int,TypedDict]:
     """
     search multiple variables and their values on first characters in 
-    the variable name that have to name as desired variables and store 
-    in list `dvars`.    
+    the variable name  that have to start from the same name as desired variables.     
     """ 
     return KHints().dosimilarvars(criteria)
     
