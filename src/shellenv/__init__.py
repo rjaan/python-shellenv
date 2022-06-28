@@ -1,7 +1,7 @@
 
 __author__      = "Author: Andrew Rzhaskov"
 __copyright__   = "Copyright: 2022, Russia Moscow"
-__version__      = "1.6" 
+__version__      = "1.7" 
 
 from typing import Any, Optional
 

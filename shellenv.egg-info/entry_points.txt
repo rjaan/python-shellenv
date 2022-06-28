@@ -1,0 +1,3 @@
+[console_scripts]
+py-shellenv = shellenv.__main__:main
+
