@@ -1,0 +1,11 @@
+LICENSE
+README.md
+pyproject.toml
+setup.py
+shellenv.egg-info/PKG-INFO
+shellenv.egg-info/SOURCES.txt
+shellenv.egg-info/dependency_links.txt
+shellenv.egg-info/entry_points.txt
+shellenv.egg-info/requires.txt
+shellenv.egg-info/top_level.txt
+shellenv.egg-info/zip-safe
